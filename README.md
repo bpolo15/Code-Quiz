@@ -1,4 +1,7 @@
 # Code-Quiz
+
+link:https://bpolo15.github.io/Code-Quiz/
+
 Goal for this activity:
 
 The main goal was to create an interactive quiz which could be played on your computer.
