@@ -35,17 +35,18 @@ var answer12 = document.querySelector('.btn12');
 
 
 
-var secondsLeft = 20;
+var secondsLeft = 30;
 var points=0;
 function setTime() {
     
   var timerInterval = setInterval(function() {
     secondsLeft--;
+    console.log(secondsLeft);
     timer.textContent = "Time: " + secondsLeft;
 
     if(secondsLeft === 0) {
       clearInterval(timerInterval);
-      endGame();
+      endgame();
     
     }
 
@@ -73,7 +74,7 @@ function startFirstQuestion(){
     console.log(firstQuestion)
     
     
-    answer1.innerHTML="Lisa Kudrow."
+    answer1.innerHTML="Lisa Kudrow"
     
 
     answer1.addEventListener('click', function(){
@@ -143,7 +144,7 @@ function startFirstQuestion(){
         console.log(firstQuestion)
         
         
-        answer8.innerHTML="10! Still not enough."
+        answer8.innerHTML="10! Still not enough"
         
     answer8.addEventListener('click', function(){
         points += 10;
@@ -209,7 +210,7 @@ function startFirstQuestion(){
         console.log(firstQuestion)
         
         
-        answer10.innerHTML="Rachel."
+        answer10.innerHTML="Rachel"
         
     answer10.addEventListener('click', function(){
         points += 10;
@@ -298,6 +299,14 @@ function endgame(){
     
    localStorage.setItem('name', nameEnter)
    localStorage.setItem('points', points)
+   var highScores = localStorage.getItem("highScores");
+   var entry = nameEnter + "-" + points;
+   if(highScores==null){
+    highScores = entry;
+   }else{
+    highScores += "," + entry;
+   }
+   localStorage.setItem('highScores' , highScores);
 
 
     highScorePage();
@@ -321,11 +330,23 @@ function highScorePage(){
     var displayPoints = localStorage.getItem('points');
     DisplayRecord.textContent = "Name: " + DisplayName + " -  Points: " + displayPoints;
 
-        displayHighScores.append(DisplayRecord)
+   
+
+
+    displayHighScores.append(DisplayRecord)
+    var highScores = localStorage.getItem('highScores');
+    for(var highScore of highScores.split(",")){
+        var highScoreDiv = document.getElementById('highScores');
+        highScoreDiv.innerHTML += highScore + "<br>";
+        console.log(highScore);
+    }
+
+    
+   
 
 
 
 
 
 
-}
+};
